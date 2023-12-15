@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1B46DD102B2C322700406C71 /* TCACalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD0F2B2C322700406C71 /* TCACalculatorApp.swift */; };
-		1B46DD122B2C322700406C71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD112B2C322700406C71 /* ContentView.swift */; };
+		1B46DD122B2C322700406C71 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD112B2C322700406C71 /* CalculatorView.swift */; };
 		1B46DD142B2C322900406C71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B46DD132B2C322900406C71 /* Assets.xcassets */; };
 		1B46DD172B2C322900406C71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B46DD162B2C322900406C71 /* Preview Assets.xcassets */; };
 		1B46DD212B2C322900406C71 /* TCACalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD202B2C322900406C71 /* TCACalculatorTests.swift */; };
 		1B46DD2B2B2C322900406C71 /* TCACalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD2A2B2C322900406C71 /* TCACalculatorUITests.swift */; };
 		1B46DD2D2B2C322900406C71 /* TCACalculatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD2C2B2C322900406C71 /* TCACalculatorUITestsLaunchTests.swift */; };
 		1B46DD3B2B2C327C00406C71 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 1B46DD3A2B2C327C00406C71 /* ComposableArchitecture */; };
+		1B46DD3D2B2C34F900406C71 /* CalculatorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD3C2B2C34F900406C71 /* CalculatorFeature.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,7 @@
 /* Begin PBXFileReference section */
 		1B46DD0C2B2C322700406C71 /* TCACalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCACalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B46DD0F2B2C322700406C71 /* TCACalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCACalculatorApp.swift; sourceTree = "<group>"; };
-		1B46DD112B2C322700406C71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1B46DD112B2C322700406C71 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		1B46DD132B2C322900406C71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B46DD162B2C322900406C71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1B46DD1C2B2C322900406C71 /* TCACalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCACalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +46,7 @@
 		1B46DD262B2C322900406C71 /* TCACalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCACalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B46DD2A2B2C322900406C71 /* TCACalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCACalculatorUITests.swift; sourceTree = "<group>"; };
 		1B46DD2C2B2C322900406C71 /* TCACalculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCACalculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1B46DD3C2B2C34F900406C71 /* CalculatorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFeature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				1B46DD0F2B2C322700406C71 /* TCACalculatorApp.swift */,
-				1B46DD112B2C322700406C71 /* ContentView.swift */,
+				1B46DD112B2C322700406C71 /* CalculatorView.swift */,
+				1B46DD3C2B2C34F900406C71 /* CalculatorFeature.swift */,
 				1B46DD132B2C322900406C71 /* Assets.xcassets */,
 				1B46DD152B2C322900406C71 /* Preview Content */,
 			);
@@ -265,7 +268,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B46DD122B2C322700406C71 /* ContentView.swift in Sources */,
+				1B46DD3D2B2C34F900406C71 /* CalculatorFeature.swift in Sources */,
+				1B46DD122B2C322700406C71 /* CalculatorView.swift in Sources */,
 				1B46DD102B2C322700406C71 /* TCACalculatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
