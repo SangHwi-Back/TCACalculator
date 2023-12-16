@@ -16,13 +16,11 @@ struct CalculatorView: View {
         WithViewStore(store, observe: {$0}) { vs in
             VStack {
                 HStack {
-                    TextFieldArea(
-                        text: vs.binding(
-                            get: \.lh,
-                            send: { .setString(\.lh, $0) }),
-                        prompt: "left")
-                    
-                    Spacer()
+                    ForEachStore(
+                        store.scope(state: \.textFields, action: Feat.Action.fromTextField)
+                    ) { textFieldStore in
+                        CommonTextField(store: textFieldStore)
+                    }
                     
                     Picker(
                         Feat.Operator.addition.rawValue,
@@ -37,14 +35,6 @@ struct CalculatorView: View {
                     .pickerStyle(.wheel)
                     .buttonStyle(BorderedButtonStyle())
                     .minimumScaleFactor(0.2)
-                    
-                    Spacer()
-                    
-                    TextFieldArea(
-                        text: vs.binding(
-                            get: \.rh,
-                            send: { .setString(\.rh, $0) }),
-                        prompt: "right")
                 }
                 .padding(.horizontal, 30)
                 .padding(.bottom, 50)
