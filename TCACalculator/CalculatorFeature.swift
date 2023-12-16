@@ -9,18 +9,24 @@ import Foundation
 import ComposableArchitecture
 
 struct CalculatorFeature: Reducer {
+    typealias UseCase = ResultUseCase
+    typealias Operator = ResultUseCase.Operator
+    @Dependency(\.resultUseCase) var useCase: UseCase
+    
     struct State: Equatable {
         var lh: String = "", rh: String = ""
-        
         var `operator`: Operator = .addition
-        
         var result: Int? = 0
+        
+        var localError: UseCase.UseCaseError?
     }
     
     enum Action {
         case refresh
         case setString(WritableKeyPath<State, String>, String)
         case setOperator(Operator)
+        case setLocalError(UseCase.UseCaseError)
+        case setResult(Int)
         case calculateButtonClicked
     }
     
@@ -31,6 +37,7 @@ struct CalculatorFeature: Reducer {
                 state.lh = ""
                 state.rh = ""
                 state.result = nil
+                state.localError = nil
                 return .none
             case .setString(let keyPath, let value):
                 state[keyPath: keyPath] = value
@@ -44,45 +51,24 @@ struct CalculatorFeature: Reducer {
             case .setOperator(let `operator`):
                 state.operator = `operator`
                 return .none
-            case .calculateButtonClicked:
-                guard 
-                    let lh = Int(state.lh), let rh = Int(state.rh)
-                else {
-                    return .none
-                }
-                
-                if state.operator == .division, rh == 0 {
-                    return .none
-                }
-                
-                state.result = lh.calculate(state.operator, operand: rh)
+            case .setLocalError(let error):
+                state.localError = error
                 return .none
+            case .setResult(let result):
+                state.result = result
+                return .none
+            case .calculateButtonClicked:
+                return .run { [lh = state.lh, rh = state.rh, op = state.operator] send in
+                    let fetch = try await useCase.getResult(lh, rh, op: op)
+                    
+                    switch fetch {
+                    case .success(let result):
+                        await send(.setResult(result))
+                    case .failure(let error):
+                        await send(.setLocalError(error))
+                    }
+                }
             }
-        }
-    }
-    
-    enum Operator: String, CaseIterable {
-        case addition // +
-        case subtraction // -
-        case multiplication // *
-        case division // ÷
-    }
-}
-
-private extension Int {
-    func calculate(
-        _ `operator`: CalculatorFeature.Operator,
-        operand: Int
-    ) -> Int {
-        switch `operator` {
-        case .addition:
-            return self + operand
-        case .subtraction:
-            return self - operand
-        case .multiplication:
-            return self * operand
-        case .division:
-            return self / operand
         }
     }
 }
