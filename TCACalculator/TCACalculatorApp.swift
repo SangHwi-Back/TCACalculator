@@ -12,9 +12,11 @@ import ComposableArchitecture
 struct TCACalculatorApp: App {
     var body: some Scene {
         WindowGroup {
-            CalculatorView(store: Store(
-                initialState: .init(),
-                reducer: { CalculatorFeature() }))
+            NavigationStack(root: {
+                CalculatorView(store: Store(
+                    initialState: .init(),
+                    reducer: { CalculatorFeature() }))
+            })
         }
     }
 }
