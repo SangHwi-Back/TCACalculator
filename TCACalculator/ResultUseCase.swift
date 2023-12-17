@@ -30,18 +30,18 @@ class ResultUseCase {
         case undefinedNumbers
     }
     
-    func getResult(_ lh: Int, _ rh: Int, op: Operator) async throws -> Result<Int, UseCaseError> {
-        try await withCheckedThrowingContinuation { continuation in
+    func getResult(_ lh: Int, _ rh: Int, op: Operator) async -> Result<Int, UseCaseError> {
+        await withCheckedContinuation { continuation in
             self.calculate(lh: lh, rh: rh, op: op) {
                 continuation.resume(returning: $0)
             }
         }
     }
     
-    func getResult(_ lh: String, _ rh: String, op: Operator) async throws -> Result<Int, UseCaseError> {
-        try await withCheckedThrowingContinuation { continuation in
+    func getResult(_ lh: String, _ rh: String, op: Operator) async -> Result<Int, UseCaseError> {
+        await withCheckedContinuation { continuation in
             guard let lh = Int(lh), let rh = Int(rh) else {
-                continuation.resume(throwing: UseCaseError.undefinedNumbers)
+                continuation.resume(returning: .failure(UseCaseError.undefinedNumbers))
                 return
             }
             
@@ -54,9 +54,11 @@ class ResultUseCase {
     private func calculate(lh: Int, rh: Int, op: Operator, completionHandler: @escaping (Result<Int, UseCaseError>) -> Void) {
         if cache.lh == lh && cache.rh == rh {
             completionHandler(Result.failure(UseCaseError.sameInput))
+            return
         }
         if lh == 0, rh == 0 {
             completionHandler(Result.failure(UseCaseError.twoNumberZero))
+            return
         }
         
         let interval = DispatchTimeInterval.seconds(isTestable ? 0 : Int.random(in: 0...3))
@@ -67,6 +69,7 @@ class ResultUseCase {
                 return
             }
             
+            self.cache = (lh, rh)
             completionHandler(Result.success(lh.calculate(op, operand: rh)))
         }
     }

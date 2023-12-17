@@ -23,6 +23,7 @@
 		1B72BD772B2F15BF009D13CB /* CalculatorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD3C2B2C34F900406C71 /* CalculatorFeature.swift */; };
 		1B72BD782B2F15C2009D13CB /* CommonTextFieldFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72BD752B2D8920009D13CB /* CommonTextFieldFeature.swift */; };
 		1B72BD792B2F17E1009D13CB /* ResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72BD6A2B2D791B009D13CB /* ResultUseCase.swift */; };
+		1B72BD7B2B2F35C6009D13CB /* ResultUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72BD7A2B2F35C6009D13CB /* ResultUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		1B72BD6A2B2D791B009D13CB /* ResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultUseCase.swift; sourceTree = "<group>"; };
 		1B72BD732B2D8919009D13CB /* CommonTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextField.swift; sourceTree = "<group>"; };
 		1B72BD752B2D8920009D13CB /* CommonTextFieldFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextFieldFeature.swift; sourceTree = "<group>"; };
+		1B72BD7A2B2F35C6009D13CB /* ResultUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +135,8 @@
 		1B46DD1F2B2C322900406C71 /* TCACalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				1B46DD202B2C322900406C71 /* TCACalculatorTests.swift */,
+				1B72BD7D2B2F35FA009D13CB /* UniTests */,
+				1B72BD7C2B2F35F3009D13CB /* IntegrationTests */,
 			);
 			path = TCACalculatorTests;
 			sourceTree = "<group>";
@@ -145,6 +148,22 @@
 				1B46DD2C2B2C322900406C71 /* TCACalculatorUITestsLaunchTests.swift */,
 			);
 			path = TCACalculatorUITests;
+			sourceTree = "<group>";
+		};
+		1B72BD7C2B2F35F3009D13CB /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				1B72BD7A2B2F35C6009D13CB /* ResultUseCaseTests.swift */,
+			);
+			path = IntegrationTests;
+			sourceTree = "<group>";
+		};
+		1B72BD7D2B2F35FA009D13CB /* UniTests */ = {
+			isa = PBXGroup;
+			children = (
+				1B46DD202B2C322900406C71 /* TCACalculatorTests.swift */,
+			);
+			path = UniTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B72BD772B2F15BF009D13CB /* CalculatorFeature.swift in Sources */,
+				1B72BD7B2B2F35C6009D13CB /* ResultUseCaseTests.swift in Sources */,
 				1B72BD782B2F15C2009D13CB /* CommonTextFieldFeature.swift in Sources */,
 				1B72BD792B2F17E1009D13CB /* ResultUseCase.swift in Sources */,
 				1B46DD212B2C322900406C71 /* TCACalculatorTests.swift in Sources */,
