@@ -6,31 +6,57 @@
 //
 
 import XCTest
-@testable import TCACalculator
+import ComposableArchitecture
 
 final class TCACalculatorTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    @MainActor
+    func testExample() async throws {
+        let store = TestStore(initialState: CalculatorFeature.State()) {
+            CalculatorFeature()
+        }
+        
+        await store.send(.refresh)
+        
+        await store.send(.setOperator(.multiplication)) { state in
+            state.operator = .multiplication
+        }
+        
+        await store.send(.setResult(5)) { state in
+            state.result = 5
         }
     }
-
+    
+    @MainActor
+    func testDivisionError() async throws {
+        let store = TestStore(initialState: CalculatorFeature.State(textFields: .init(uniqueElements: [
+            .init(),
+            .init(text: "0")
+        ]))) {
+            CalculatorFeature()
+        }
+        
+        await store.send(.calculateButtonClicked)
+        await store.receive(/CalculatorFeature.Action.setLocalError) { state in
+            state.localError = .undefinedNumbers
+        }
+    }
+    
+    @MainActor
+    func testFailed() async throws {
+        let store = TestStore(initialState: CalculatorFeature.State(textFields: .init(uniqueElements: [
+            .init(text: "2"),
+            .init(text: "0")
+        ]))) {
+            CalculatorFeature()
+        }
+        
+        await store.send(.setOperator(.division)) { state in
+            state.operator = .division
+        }
+        
+        await store.send(.calculateButtonClicked).finish()
+        await store.receive(/CalculatorFeature.Action.setLocalError) { state in
+            state.localError = .divideWithZero
+        }
+    }
 }

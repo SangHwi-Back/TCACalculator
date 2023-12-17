@@ -20,6 +20,9 @@
 		1B72BD6B2B2D791B009D13CB /* ResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72BD6A2B2D791B009D13CB /* ResultUseCase.swift */; };
 		1B72BD742B2D8919009D13CB /* CommonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72BD732B2D8919009D13CB /* CommonTextField.swift */; };
 		1B72BD762B2D8920009D13CB /* CommonTextFieldFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72BD752B2D8920009D13CB /* CommonTextFieldFeature.swift */; };
+		1B72BD772B2F15BF009D13CB /* CalculatorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B46DD3C2B2C34F900406C71 /* CalculatorFeature.swift */; };
+		1B72BD782B2F15C2009D13CB /* CommonTextFieldFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72BD752B2D8920009D13CB /* CommonTextFieldFeature.swift */; };
+		1B72BD792B2F17E1009D13CB /* ResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B72BD6A2B2D791B009D13CB /* ResultUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,6 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B72BD772B2F15BF009D13CB /* CalculatorFeature.swift in Sources */,
+				1B72BD782B2F15C2009D13CB /* CommonTextFieldFeature.swift in Sources */,
+				1B72BD792B2F17E1009D13CB /* ResultUseCase.swift in Sources */,
 				1B46DD212B2C322900406C71 /* TCACalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

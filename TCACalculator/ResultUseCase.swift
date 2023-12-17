@@ -9,8 +9,12 @@ import Foundation
 import ComposableArchitecture
 
 class ResultUseCase {
+    private let isTestable: Bool
+    private var cache: (lh: Int?, rh: Int?)
     
-    var cache: (lh: Int?, rh: Int?)
+    init(isTestable: Bool = false) {
+        self.isTestable = isTestable
+    }
     
     enum Operator: String, CaseIterable {
         case addition // +
@@ -55,11 +59,12 @@ class ResultUseCase {
             completionHandler(Result.failure(UseCaseError.twoNumberZero))
         }
         
-        let interval = DispatchTimeInterval.seconds(Int.random(in: 0...3))
+        let interval = DispatchTimeInterval.seconds(isTestable ? 0 : Int.random(in: 0...3))
         
         DispatchQueue.global().asyncAfter(deadline: .now() + interval) {
-            if op == .division, rh == 0 {
+            guard (op == .division && rh == 0) == false else {
                 completionHandler(Result.failure(UseCaseError.divideWithZero))
+                return
             }
             
             completionHandler(Result.success(lh.calculate(op, operand: rh)))
@@ -70,6 +75,7 @@ class ResultUseCase {
 
 extension ResultUseCase: DependencyKey {
     static var liveValue: ResultUseCase = .init()
+    static var testValue: ResultUseCase = .init(isTestable: true)
 }
 
 extension DependencyValues {

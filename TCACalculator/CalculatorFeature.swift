@@ -14,10 +14,9 @@ struct CalculatorFeature: Reducer {
     @Dependency(\.resultUseCase) var useCase: UseCase
     
     struct State: Equatable {
-        var lh: String = "", rh: String = ""
         var textFields = IdentifiedArrayOf<CommonTextFieldFeature.State>(uniqueElements: [.init(), .init()])
         var `operator`: Operator = .addition
-        var result: Int? = 0
+        var result: Int?
         
         var localError: UseCase.UseCaseError?
     }
@@ -36,8 +35,6 @@ struct CalculatorFeature: Reducer {
         Reduce { state, action in
             switch action {
             case .refresh:
-                state.lh = ""
-                state.rh = ""
                 state.result = nil
                 state.localError = nil
                 return .none
@@ -60,8 +57,12 @@ struct CalculatorFeature: Reducer {
                     case .failure(let error):
                         await send(.setLocalError(error))
                     }
+                } catch: { error, send in
+                    if let error = error as? UseCase.UseCaseError {
+                        await send(.setLocalError(error))
+                    }
                 }
-            case .fromTextField(_, _):
+            default:
                 return .none
             }
         }
