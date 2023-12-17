@@ -52,20 +52,6 @@ struct CalculatorView: View {
         }
         .navigationTitle("Calculator")
     }
-    
-    struct TextFieldArea: View {
-        @Binding var text: String
-        var prompt: String
-        
-        var body: some View {
-            TextField(text: $text, prompt: Text(prompt)) {
-                EmptyView()
-            }
-            .keyboardType(.numberPad)
-            .multilineTextAlignment(.center)
-            .border(.secondary)
-        }
-    }
 }
 
 #Preview {
